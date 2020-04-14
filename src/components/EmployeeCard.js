@@ -1,13 +1,17 @@
 import React from "react";
 // want to arrange this as a table, not a card with pic at top
-function EmployeeCard() {
+function EmployeeCard(props) {
   return (
     <tr>
-      <td>Picture </td>
-      <td>Name.first + Name.last</td>
-      <td>Location.city, Location.state</td>
-      <td>Email</td>
-      <td>Phone</td>
+      {props.results.map((result) => (
+        <>
+          <td>Picture </td>
+          <td>{result.name.first}</td>
+          <td>{result.location.city}</td>
+          <td>{result.email}</td>
+          <td>Phone</td>
+        </>
+      ))}
     </tr>
   );
 }

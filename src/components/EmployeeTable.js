@@ -1,20 +1,44 @@
 import React, { Component } from "react";
 import Search from "./Search";
-import EmployeeCard from "./EmployeeCard";
-// import ResultList from "./ResultList";
+// import EmployeeCard from "./EmployeeCard";
 // import API from "../utils/API";
+import axios from "axios";
 
 class EmployeeTable extends Component {
   state = {
     search: "",
-    results: [],
+    //  (sortKey)? search(?)
+    empResults: [],
+    filterResults: [],
   };
+
+  // componentDidMount() {
+  //   this.searchEmployees("Tom");
+  // }
 
   // searchEmployees = (query) => {
   //   API.search(query)
   //     .then((res) => this.setState({ results: res.data.data }))
   //     .catch((err) => console.log(err));
   // };
+
+  searchEmployees() {
+    axios.get("https://randomuser.me/api/?results=20&nat=us").then((res) => {
+      res.data.results.forEach((emp) => {
+        emp.fullName = emp.name.first + " " + emp.name.last;
+        emp.location = emp.location.city + ", " + emp.location.state;
+        // emp.email = emp.email;
+        // emp.phone = emp.phone;
+      });
+      this.setState({
+        empResults: res.data.results,
+        filterResults: res.data.results,
+      });
+    });
+  }
+  async componentDidMount() {
+    await this.getEmployees();
+  }
 
   handleInputChange = (event) => {
     const name = event.target.name;
@@ -24,13 +48,12 @@ class EmployeeTable extends Component {
     });
   };
 
-  // When the form is submitted, search the Giphy API for `this.state.search`
   handleFormSubmit = (event) => {
     event.preventDefault();
-    this.searchEmployees(this.state.search);
+    console.log(this.searchEmployees(this.state.search));
   };
 
-  render() {
+  render(empResults) {
     return (
       <>
         <Search
@@ -49,9 +72,12 @@ class EmployeeTable extends Component {
             </tr>
           </thead>
           <tbody>
-            <EmployeeCard />
-            <EmployeeCard />
-            <EmployeeCard />
+            <p>something here</p>
+            {empResults
+          .filter((emp) => emp.name === "Tom")
+          .map((newList) => (
+            <div>{newList.name}</div>
+          ))}
           </tbody>
         </table>
       </>
@@ -60,3 +86,4 @@ class EmployeeTable extends Component {
 }
 
 export default EmployeeTable;
+
