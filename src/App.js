@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import EmployeeTable from "./components/EmployeeTable";
 // import EmployeeCard from "./components/EmployeeCard";
 // import EmployeeTable from "./components/EmployeeTable";
 
@@ -15,6 +16,7 @@ function App() {
           </p>
         </div>
       </div>
+      <EmployeeTable />
     </div>
   );
 }

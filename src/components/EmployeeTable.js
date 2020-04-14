@@ -1,42 +1,43 @@
 import React, { Component } from "react";
-import EmployeeCard from "./EmployeeCard.js";
+import Search from "./Search";
+// import ResultList from "./ResultList";
 // import API from "../utils/API";
-import axios from "axios";
-import SearchBar from "./SearchBar.js";
+
 class EmployeeTable extends Component {
   state = {
-    empList: [],
-    displayList: [],
-    sortKey: "",
     search: "",
-    sortNameIcon: "fa fa-sort",
-    sortDobIcon: "fa fa-sort",
+    results: [],
   };
-  getEmployees() {
-    axios.get("https://randomuser.me/api/?results=20&nat=us").then((res) => {
-      res.data.results.forEach((emp) => {
-        emp.fullName = emp.name.first + " " + emp.name.last;
-        emp.birthdate = emp.dob.date.substr(0, 10);
-      });
-      this.setState({
-        empList: res.data.results,
-        displayList: res.data.results,
-      });
+
+  // searchEmployees = (query) => {
+  //   API.search(query)
+  //     .then((res) => this.setState({ results: res.data.data }))
+  //     .catch((err) => console.log(err));
+  // };
+
+  handleInputChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    this.setState({
+      [name]: value,
     });
-  }
-  async componentDidMount() {
-    await this.getEmployees();
-  }
+  };
+
+  // When the form is submitted, search the Giphy API for `this.state.search`
+  handleFormSubmit = (event) => {
+    event.preventDefault();
+    this.searchEmployees(this.state.search);
+  };
+
   render() {
     return (
-      <div>
-        {empList
-          .filter((emp) => emp.name === "Tom")
-          .map((newList) => (
-            <div>{newList.name}</div>
-          ))}
-      </div>
+      <Search
+        search={this.state.search}
+        handleFormSubmit={this.handleFormSubmit}
+        handleInputChange={this.handleInputChange}
+      />
     );
   }
 }
+
 export default EmployeeTable;
