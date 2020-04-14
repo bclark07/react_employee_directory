@@ -49,3 +49,31 @@ You are required to submit the following:
 - the URL to the deployed application
 
 - the URL to the Github repository
+
+Demonstration of HW: https://codingbootcamp.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=a531ea75-f099-4b57-a7fb-ab7e010d7276
+@1:37, 1:33 left
+
+How to make a loop:
+map over an array and return a new array:
+const people = ["one", "two"] OR import an array from another file?
+{people.map((person, index) => (
+
+<div>Testing Person: {index}</div>
+))}
+
+api: https://randomuser.me/api/?results=200&nat=us
+
+https://randomuser.me/api/?results=20&nat=us
+
+Since the new user api doesnt return images you could do something like this to add random profile pics to all the users with the https://jsonplaceholder.typicode.com/users API: (edited)
+
+let count = 0;
+let usersWithPics = res.map(user => {
+count++;
+return {
+...user,
+pic: `https://i.pravatar.cc/90?random=${count}`
+};
+});
+
+Dont feel like you have to do this just a way to add a random placeholder pic right after the api call and before setting the state with the users
