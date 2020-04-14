@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Search from "./Search";
+import EmployeeCard from "./EmployeeCard";
 // import ResultList from "./ResultList";
 // import API from "../utils/API";
 
@@ -31,11 +32,29 @@ class EmployeeTable extends Component {
 
   render() {
     return (
-      <Search
-        search={this.state.search}
-        handleFormSubmit={this.handleFormSubmit}
-        handleInputChange={this.handleInputChange}
-      />
+      <>
+        <Search
+          search={this.state.search}
+          handleFormSubmit={this.handleFormSubmit}
+          handleInputChange={this.handleInputChange}
+        />
+        <table class="table mb-2 mt-sm-2">
+          <thead>
+            <tr>
+              <th scope="col">Image</th>
+              <th scope="col">Name</th>
+              <th scope="col">Location</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+            <EmployeeCard />
+            <EmployeeCard />
+            <EmployeeCard />
+          </tbody>
+        </table>
+      </>
     );
   }
 }
