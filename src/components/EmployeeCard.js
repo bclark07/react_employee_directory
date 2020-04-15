@@ -1,17 +1,21 @@
 import React from "react";
-// want to arrange this as a table, not a card with pic at top
-function EmployeeCard(props) {
+
+function EmployeeCard({ employee }) {
   return (
     <tr>
-      {props.results.map((result) => (
-        <>
-          <td>Picture </td>
-          <td>{result.name.first}</td>
-          <td>{result.location.city}</td>
-          <td>{result.email}</td>
-          <td>Phone</td>
-        </>
-      ))}
+      <td>
+        <div className="img-container">
+          <img alt={employee.name.first} src={employee.picture.medium} />
+        </div>
+      </td>
+      <td>
+        {employee.name.first} {employee.name.last}
+      </td>
+      <td>
+        {employee.location.city}, {employee.location.state}
+      </td>
+      <td>{employee.email}</td>
+      <td>{employee.phone}</td>
     </tr>
   );
 }

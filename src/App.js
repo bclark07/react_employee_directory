@@ -1,10 +1,22 @@
-import React from "react";
-import "./App.css";
-import EmployeeTable from "./components/EmployeeTable";
-// import EmployeeCard from "./components/EmployeeCard";
-// import EmployeeTable from "./components/EmployeeTable";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Search from "./components/Search";
+import EmployeeCard from "./components/EmployeeCard";
 
 function App() {
+  const [employeeData, setEmployeeData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get(
+        "https://randomuser.me/api/?results=200&nat=us"
+      );
+      setEmployeeData(res.data.results);
+    };
+    fetchData();
+  }, []);
+  console.log(employeeData);
+
   return (
     <div className="container">
       <div class="jumbotron jumbotron-fluid bg-info">
@@ -16,24 +28,27 @@ function App() {
           </p>
         </div>
       </div>
-      <EmployeeTable />
+      <Search />
+      {employeeData && (
+        <table class="table mb-2 mt-sm-2">
+          <thead>
+            <tr>
+              <th scope="col">Image</th>
+              <th scope="col">Name</th>
+              <th scope="col">Location</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+            {employeeData.slice(0, 15).map((employee) => (
+              <EmployeeCard key={employee.id.value} employee={employee} />
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }
 
 export default App;
-
-// <EmployeeTable >
-// <Title>Friends List</Title>
-// <EmployeeCard />
-// <FriendCard
-//   name={friends[1].name}
-//   image={friends[1].image}
-//   occupation={friends[1].occupation}
-//   location={friends[1].location}
-// />
-// <EmployeeCard />
-// <EmployeeCard />
-// <EmployeeCard />
-// <EmployeeCard />
-// </EmployeeTable>
