@@ -24,8 +24,7 @@ function App() {
         <div className="container">
           <h1 className="display-4 text-center">Employee Directory</h1>
           <p className="lead  text-center">
-            Click on cards to filter by heading or use the search box to narrow
-            your results.
+            Use the search box to narrow your results by first name.
           </p>
         </div>
       </div>
